@@ -21,14 +21,14 @@ trait ApiResponse
     private $default_error_message = "Sorry, something went wrong";
 
     /**
-     * Returns a sucess response
+     * Returns a response
      *
      * @param object|array $data
      * @param integer $code
      * @param string $message
      * @return \Illuminate\Http\JsonResponse
      */
-    public function sucess_response($data, string $message = null, int $code = 200)
+    public function response($data, string $message = null, int $code = 200)
     {
         try {
             return response()->json([

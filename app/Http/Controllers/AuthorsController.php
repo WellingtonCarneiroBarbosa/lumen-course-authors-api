@@ -18,7 +18,7 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        return $this->sucess_response(
+        return $this->response(
             Author::paginate(15),
         );
     }
@@ -39,7 +39,7 @@ class AuthorsController extends Controller
 
         $author = Author::create($data);
 
-        return $this->sucess_response(
+        return $this->response(
             $author,
             "Author created sucessfully",
             Response::HTTP_CREATED,
@@ -49,34 +49,42 @@ class AuthorsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Author  $author
+     * @param  int $author
      * @return \Illuminate\Http\Response
      */
-    public function show(Author $author)
+    public function show($author)
     {
-        return $this->sucess_response([]);
+        if(! $author = Author::where("id", $author)->first()) {
+            return $this->response(
+                [],
+                "Author not found",
+                404,
+            );
+        }
+
+        return $this->response($author);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Author  $author
+     * @param  int $author
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Author $author)
     {
-        return $this->sucess_response([]);
+        return $this->response([]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Author  $author
+     * @param  int $author
      * @return \Illuminate\Http\Response
      */
     public function destroy(Author $author)
     {
-        return $this->sucess_response([]);
+        return $this->response([]);
     }
 }
