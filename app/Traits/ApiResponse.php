@@ -11,7 +11,7 @@ trait ApiResponse
      *
      * @var string
      */
-    private $default_sucess_message = "Okay";
+    private $default_sucess_message = "";
 
     /**
      * The default error message
@@ -28,7 +28,7 @@ trait ApiResponse
      * @param string $message
      * @return \Illuminate\Http\JsonResponse
      */
-    public function sucess_response($data, int $code = 200, string $message = null)
+    public function sucess_response($data, string $message = null, int $code = 200)
     {
         try {
             return response()->json([

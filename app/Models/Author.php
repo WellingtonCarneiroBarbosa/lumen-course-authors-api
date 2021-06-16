@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\Model\Pagination;
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;

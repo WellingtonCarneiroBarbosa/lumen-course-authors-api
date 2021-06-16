@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Author;
+use App\Models\Author;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
@@ -30,7 +30,18 @@ class AuthorsController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->sucess_response([]);
+        $data = $this->validate($request, [
+            "name"      => ['required', 'string', 'max:255'],
+            "country"   => ['required', 'string', 'max:255'],
+            "gender"    => ['required', 'string', 'max:255', 'in:m,f'],
+        ]);
+
+        $author = Author::create($data);
+
+        return $this->sucess_response(
+            $author,
+            "Author created sucessfully",
+        );
     }
 
     /**
