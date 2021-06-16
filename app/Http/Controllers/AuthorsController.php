@@ -116,8 +116,22 @@ class AuthorsController extends Controller
      * @param  int $author
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Author $author)
+    public function destroy($author)
     {
-        return $this->response([]);
+        if(! $author = Author::where("id", $author)->first()) {
+            return $this->response(
+                [],
+                "Author not found",
+                404,
+            );
+        }
+
+        $author->delete();
+
+        return $this->response(
+            [],
+            "Author {$author->name} deleted sucessfully",
+            Response::HTTP_OK
+        );
     }
 }
