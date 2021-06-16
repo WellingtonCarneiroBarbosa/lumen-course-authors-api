@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Author extends Model
 {
-    use Authenticatable, Authorizable, HasFactory;
+    use Authenticatable,
+        Authorizable,
+        HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +19,6 @@ class Author extends Model
      * @var array
      */
     protected $fillable = [
-        'uuid',
         'name',
         'gender',
         'country'
