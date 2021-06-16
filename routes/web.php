@@ -2,17 +2,25 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
-*/
-
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return response()->json([
+        "message" => config('app.name') . " - " . $router->app->version(),
+        "status" => 200,
+    ], 200);
+});
+
+/**
+ * Authors Routes
+ *
+ */
+$router->group(['prefix' => 'authors'], function () use ($router) {
+    $router->get("/", "AuthorsController@index");
+    $router->post("/", "AuthorsController@store");
+
+    // Author id prefix routes
+    $router->group(['prefix' => "{author}"], function () use ($router) {
+        $router->get("/", "AuthorsController@show");
+        $router->put("/", "AuthorsController@update");
+        $router->delete("/", "AuthorsController@destroy");
+    });
 });

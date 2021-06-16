@@ -14,17 +14,11 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()
+                ->json([
+                    "message" => "Hello World",
+                    "status" => 200,
+                ]);
     }
 
     /**
@@ -45,17 +39,6 @@ class AuthorsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Author $author)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Author  $author
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Author $author)
     {
         //
     }
