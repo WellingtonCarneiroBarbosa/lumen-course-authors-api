@@ -12,6 +12,17 @@ class AuthorsController extends Controller
     use ApiResponse;
 
     /**
+     * The default form
+     *
+     * @var array
+     */
+    protected $rules = [
+        "name"      => ['required', 'string', 'max:255'],
+        "country"   => ['required', 'string', 'max:255'],
+        "gender"    => ['required', 'string', 'max:255', 'in:m,f'],
+    ];
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -31,11 +42,7 @@ class AuthorsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->validate($request, [
-            "name"      => ['required', 'string', 'max:255'],
-            "country"   => ['required', 'string', 'max:255'],
-            "gender"    => ['required', 'string', 'max:255', 'in:m,f'],
-        ]);
+        $data = $this->validate($request, $this->rules);
 
         $author = Author::create($data);
 
@@ -72,9 +79,35 @@ class AuthorsController extends Controller
      * @param  int $author
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Author $author)
+    public function update(Request $request, $author)
     {
-        return $this->response([]);
+        if(! $author = Author::where("id", $author)->first()) {
+            return $this->response(
+                [],
+                "Author not found",
+                404,
+            );
+        }
+
+        $data = $this->validate($request, $this->rules);
+
+        $author->fill($data);
+
+        if($author->isClean()) {
+            return $this->response(
+                [],
+                "At least one value must change",
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
+
+        $author->save();
+
+        return $this->response(
+            $author,
+            "Author {$author->name} updated sucessfully",
+            Response::HTTP_ACCEPTED
+        );
     }
 
     /**
