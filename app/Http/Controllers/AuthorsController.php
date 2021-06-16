@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Author;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthorsController extends Controller
 {
@@ -41,6 +42,7 @@ class AuthorsController extends Controller
         return $this->sucess_response(
             $author,
             "Author created sucessfully",
+            Response::HTTP_CREATED,
         );
     }
 
