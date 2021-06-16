@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Author;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
 class AuthorsController extends Controller
 {
+    use ApiResponse;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,11 +17,11 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        return response()
-                ->json([
-                    "message" => "Hello World",
-                    "status" => 200,
-                ]);
+        try {
+            return $this->sucess_response([]);
+        } catch(\Exception $e) {
+            return $this->error_response($e->getMessage());
+        }
     }
 
     /**
@@ -29,7 +32,11 @@ class AuthorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            return $this->sucess_response([]);
+        } catch(\Exception $e) {
+            return $this->error_response($e->getMessage());
+        }
     }
 
     /**
@@ -40,7 +47,11 @@ class AuthorsController extends Controller
      */
     public function show(Author $author)
     {
-        //
+        try {
+            return $this->sucess_response([]);
+        } catch(\Exception $e) {
+            return $this->error_response($e->getMessage());
+        }
     }
 
     /**
@@ -52,7 +63,11 @@ class AuthorsController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        try {
+            return $this->sucess_response([]);
+        } catch(\Exception $e) {
+            return $this->error_response($e->getMessage());
+        }
     }
 
     /**
@@ -63,6 +78,10 @@ class AuthorsController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        try {
+            return $this->sucess_response([]);
+        } catch(\Exception $e) {
+            return $this->error_response($e->getMessage());
+        }
     }
 }
