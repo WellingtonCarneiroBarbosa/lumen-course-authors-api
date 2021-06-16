@@ -44,32 +44,4 @@ trait ApiResponse
             }
         }
     }
-
-    /**
-     * Returns a error response
-     *
-     * @param string $message
-     * @param integer $code
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function error_response(string $message = null, int $code = 500)
-    {
-        try {
-            return response()->json([
-                    "data"      => [],
-                    "message"   => $message ?? $this->default_error_message,
-                    "status"    => $code,
-                ], $code);
-        } catch(\Exception $e) {
-            if(config('app.debug')) {
-                throw new \Exception($e->getMessage());
-            } else {
-                return response()->json([
-                    "data"      => [],
-                    "message"   => $this->default_error_message,
-                    "status"    => $code,
-                ], $code);
-            }
-        }
-    }
 }

@@ -17,11 +17,9 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        try {
-            return $this->sucess_response([]);
-        } catch(\Exception $e) {
-            return $this->error_response($e->getMessage());
-        }
+        return $this->sucess_response(
+            Author::paginate(15),
+        );
     }
 
     /**
@@ -32,11 +30,7 @@ class AuthorsController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            return $this->sucess_response([]);
-        } catch(\Exception $e) {
-            return $this->error_response($e->getMessage());
-        }
+        return $this->sucess_response([]);
     }
 
     /**
@@ -47,11 +41,7 @@ class AuthorsController extends Controller
      */
     public function show(Author $author)
     {
-        try {
-            return $this->sucess_response([]);
-        } catch(\Exception $e) {
-            return $this->error_response($e->getMessage());
-        }
+        return $this->sucess_response([]);
     }
 
     /**
@@ -63,11 +53,7 @@ class AuthorsController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        try {
-            return $this->sucess_response([]);
-        } catch(\Exception $e) {
-            return $this->error_response($e->getMessage());
-        }
+        return $this->sucess_response([]);
     }
 
     /**
@@ -78,10 +64,6 @@ class AuthorsController extends Controller
      */
     public function destroy(Author $author)
     {
-        try {
-            return $this->sucess_response([]);
-        } catch(\Exception $e) {
-            return $this->error_response($e->getMessage());
-        }
+        return $this->sucess_response([]);
     }
 }
