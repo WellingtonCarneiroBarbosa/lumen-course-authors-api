@@ -12,6 +12,13 @@ class AuthorsController extends Controller
     use ApiResponse;
 
     /**
+     * The message that is sent if Author's not found
+     *
+     * @var string
+     */
+    protected $author_not_found_message = "Author not found";
+
+    /**
      * The default form
      *
      * @var array
@@ -61,10 +68,12 @@ class AuthorsController extends Controller
      */
     public function show($author)
     {
-        if(! $author = Author::where("id", $author)->first()) {
+        try {
+            $author = Author::findOrFail($author);
+        } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return $this->response(
                 [],
-                "Author not found",
+                $this->author_not_found_message,
                 404,
             );
         }
@@ -81,10 +90,12 @@ class AuthorsController extends Controller
      */
     public function update(Request $request, $author)
     {
-        if(! $author = Author::where("id", $author)->first()) {
+        try {
+            $author = Author::findOrFail($author);
+        } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return $this->response(
                 [],
-                "Author not found",
+                $this->author_not_found_message,
                 404,
             );
         }
@@ -118,10 +129,12 @@ class AuthorsController extends Controller
      */
     public function destroy($author)
     {
-        if(! $author = Author::where("id", $author)->first()) {
+        try {
+            $author = Author::findOrFail($author);
+        } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return $this->response(
                 [],
-                "Author not found",
+                $this->author_not_found_message,
                 404,
             );
         }
