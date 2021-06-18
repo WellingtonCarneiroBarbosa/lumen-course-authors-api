@@ -12,13 +12,6 @@ class AuthorsController extends Controller
     use ApiResponse;
 
     /**
-     * The message that is sent if Author's not found
-     *
-     * @var string
-     */
-    protected $author_not_found_message = "Author not found";
-
-    /**
      * The default form
      *
      * @var array
@@ -68,15 +61,7 @@ class AuthorsController extends Controller
      */
     public function show($author)
     {
-        try {
-            $author = Author::findOrFail($author);
-        } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return $this->response(
-                [],
-                $this->author_not_found_message,
-                404,
-            );
-        }
+        $author = Author::findOrFail($author);
 
         return $this->response($author);
     }
@@ -90,15 +75,7 @@ class AuthorsController extends Controller
      */
     public function update(Request $request, $author)
     {
-        try {
-            $author = Author::findOrFail($author);
-        } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return $this->response(
-                [],
-                $this->author_not_found_message,
-                404,
-            );
-        }
+        $author = Author::findOrFail($author);
 
         $data = $this->validate($request, $this->rules);
 
@@ -129,15 +106,7 @@ class AuthorsController extends Controller
      */
     public function destroy($author)
     {
-        try {
-            $author = Author::findOrFail($author);
-        } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return $this->response(
-                [],
-                $this->author_not_found_message,
-                404,
-            );
-        }
+        $author = Author::findOrFail($author);
 
         $author->delete();
 
