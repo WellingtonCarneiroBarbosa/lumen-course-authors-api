@@ -12,7 +12,7 @@ class AuthorsController extends Controller
     use ApiResponse;
 
     /**
-     * The default form
+     * The default form rules
      *
      * @var array
      */

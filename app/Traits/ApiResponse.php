@@ -14,13 +14,6 @@ trait ApiResponse
     private $default_sucess_message = "";
 
     /**
-     * The default error message
-     *
-     * @var string
-     */
-    private $default_error_message = "Sorry, something went wrong";
-
-    /**
      * Returns a response
      *
      * @param object|array $data
